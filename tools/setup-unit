@@ -3,7 +3,8 @@
 #####################################################################
 #
 # Copyright (C) NGINX, Inc.
-# Author:  NGINX Unit Team, F5 Inc.
+# Author: NGINX Unit Team, F5 Inc.
+# Copyright 2024, Alejandro Colomar <alx@kernel.org>
 #
 #####################################################################
 
@@ -36,7 +37,7 @@ help_unit()
 {
     cat <<__EOF__ ;
 SYNOPSIS
-        $0 [-h] COMMAND [ARGS]
+        $0 [-h[h]] COMMAND [ARGS]
 
     Subcommands
         ├── repo-config  [-hn] [PKG-MANAGER OS-NAME OS-VERSION]
@@ -61,9 +62,8 @@ OPTIONS
         -h, --help
                 Print this help.
 
-        --help-more
-                Print help for more commands.  They are experimental.  Using
-                these isn't recommended, unless you know what you're doing.
+        -hh, --help-more
+                Print help for more (advanced) commands.
 
 __EOF__
 }
@@ -72,14 +72,14 @@ help_more_unit()
 {
     cat <<__EOF__ ;
 SYNOPSIS
-        $0 [-h] COMMAND [ARGS]
+        $0 [-h[h]] COMMAND [ARGS]
 
     Subcommands
         ├── cmd          [-h]
         ├── ctl          [-h] [-s SOCK] SUBCOMMAND [ARGS]
-        │   ├── edit     [-h] PATH
-        │   ├── http     [-h] [-c CURLOPT] METHOD PATH
-        │   └── insert   [-h] PATH INDEX
+        │   ├── edit     [-h] PATH
+        │   ├── http     [-h] [-c CURLOPT] METHOD PATH
+        │   └── insert   [-h] PATH INDEX
         ├── freeport     [-h]
         ├── json-ins     [-hn] JSON INDEX
         ├── os-probe     [-h]
@@ -87,8 +87,8 @@ SYNOPSIS
         ├── repo-config  [-hn] [PKG-MANAGER OS-NAME OS-VERSION]
         ├── restart      [-hls]
         ├── sock         [-h] SUBCOMMAND [ARGS]
-        │   ├── filter   [-chs]
-        │   └── find     [-h]
+        │   ├── filter   [-chs]
+        │   └── find     [-h]
         └── welcome      [-hn]
 
 DESCRIPTION
@@ -118,6 +118,9 @@ COMMANDS
                 Configure your package manager with the NGINX Unit
                 repository for later installation.
 
+        restart
+                Restart all running unitd(8) instances.
+
         sock    Print the control API socket address.
 
         welcome
@@ -128,7 +131,7 @@ OPTIONS
         -h, --help
                 Print basic help (some commands are hidden).
 
-        --help-more
+        -hh, --help-more
                 Print the hidden help with more commands.
 
 __EOF__
@@ -1634,7 +1637,7 @@ while test $# -ge 1; do
         help_unit;
         exit 0;
         ;;
-    --help-more)
+    -hh | --help-more)
         help_more_unit;
         exit 0;
         ;;
