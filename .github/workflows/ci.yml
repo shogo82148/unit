@@ -216,7 +216,7 @@ jobs:
           sudo apt-get install libperl-dev
         if: steps.metadata.outputs.module == 'perl' && steps.metadata.outputs.version == ''
 
-      - uses: shogo82148/actions-setup-perl@v1
+      - uses: shogo82148/actions-setup-perl@main
         with:
           perl-version: "${{ steps.metadata.outputs.version }}"
         if: steps.metadata.outputs.module == 'perl' && steps.metadata.outputs.version != ''
